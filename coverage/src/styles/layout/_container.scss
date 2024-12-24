@@ -1,0 +1,100 @@
+@use '../base/variables' as *;
+
+.coverage-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $spacing-medium;
+
+    @media (max-width: $breakpoint-medium) {
+        padding: $spacing-small;
+    }
+
+    // Header section
+    &__header {
+        margin-bottom: $spacing-large;
+        
+        h1 {
+            font-size: $font-size-large * 1.5;
+            margin: 0 0 $spacing-medium;
+            color: $color-text;
+        }
+    }
+
+    // Controls section
+    &__controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-medium;
+        margin-bottom: $spacing-large;
+        align-items: center;
+
+        @media (max-width: $breakpoint-small) {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        // Filter input
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+
+            label {
+                display: block;
+                margin-bottom: $spacing-small;
+                font-weight: 600;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                padding: $spacing-small;
+                border: 1px solid rgba($color-text, 0.2);
+                border-radius: $border-radius;
+                font-size: $font-size-base;
+                
+                &:focus {
+                    border-color: $color-primary;
+                    box-shadow: 0 0 0 2px rgba($color-primary, 0.1);
+                }
+            }
+        }
+
+        // Checkbox group
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: $spacing-small;
+
+            input[type="checkbox"] {
+                width: 20px;
+                height: 20px;
+                margin: 0;
+                cursor: pointer;
+
+                &:focus {
+                    outline: 2px solid $color-primary;
+                    outline-offset: 2px;
+                }
+            }
+
+            label {
+                cursor: pointer;
+            }
+        }
+    }
+
+    // Table container
+    &__table {
+        margin-bottom: $spacing-large;
+        border-radius: $border-radius;
+        overflow: hidden;
+        box-shadow: $shadow-medium;
+    }
+
+    // Footer section
+    &__footer {
+        text-align: center;
+        padding: $spacing-large 0;
+        color: $color-secondary;
+        font-size: $font-size-small;
+    }
+} 

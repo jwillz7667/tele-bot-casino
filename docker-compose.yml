@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    container_name: casino-bot
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - bot-network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    container_name: casino-db
+    environment:
+      POSTGRES_DB: casino
+      POSTGRES_USER: casino
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bot-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U casino"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  bot-network:
+    driver: bridge
+
+volumes:
+  postgres_data: 

@@ -1,0 +1,59 @@
+// Base
+@use 'base/variables';
+
+// Components
+@use 'components/table';
+
+// Layout
+@use 'layout/container';
+
+// Utils
+@use 'utils/accessibility';
+
+// Reset and base styles
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: variables.$font-family-base;
+    line-height: variables.$line-height-base;
+    color: variables.$color-text;
+    background-color: variables.$color-background;
+}
+
+// Focus styles for accessibility
+:focus {
+    outline: 2px solid variables.$color-primary;
+    outline-offset: 2px;
+}
+
+// Skip to main content link
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: variables.$color-primary;
+    color: variables.$color-background;
+    padding: variables.$spacing-medium;
+    z-index: variables.$z-index-modal;
+    transition: top variables.$transition-quick;
+
+    &:focus {
+        top: 0;
+    }
+}
+
+// High contrast mode support
+@media (forced-colors: active) {
+    .coverage-table {
+        border: 1px solid CanvasText;
+    }
+} 

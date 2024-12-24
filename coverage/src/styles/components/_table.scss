@@ -1,0 +1,166 @@
+@use '../base/variables' as *;
+
+.coverage-table {
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+
+    // Virtual scroll container
+    &-container {
+        position: relative;
+        height: 70vh;
+        overflow-y: auto;
+        overflow-x: auto;
+
+        // Improve scrolling performance
+        -webkit-overflow-scrolling: touch;
+        will-change: transform;
+    }
+
+    // Virtual scroll viewport
+    &-viewport {
+        position: relative;
+        width: 100%;
+    }
+
+    // Header styles
+    thead {
+        position: sticky;
+        top: 0;
+        z-index: $z-index-table-header;
+        background-color: $color-background;
+        box-shadow: $shadow-small;
+
+        th {
+            padding: $spacing-medium;
+            text-align: left;
+            color: $color-text;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color $transition-quick;
+
+            // Sort indicators
+            &[aria-sort] {
+                &::after {
+                    content: '';
+                    display: inline-block;
+                    width: 0;
+                    height: 0;
+                    margin-left: $spacing-small;
+                    vertical-align: middle;
+                    border-right: 4px solid transparent;
+                    border-left: 4px solid transparent;
+                }
+
+                &[aria-sort="ascending"]::after {
+                    border-bottom: 4px solid currentColor;
+                }
+
+                &[aria-sort="descending"]::after {
+                    border-top: 4px solid currentColor;
+                }
+            }
+
+            // Hover state
+            &:hover {
+                background-color: rgba($color-primary, 0.05);
+            }
+
+            // Focus state for keyboard navigation
+            &:focus {
+                outline: 2px solid $color-primary;
+                outline-offset: -2px;
+            }
+        }
+    }
+
+    // Row styles
+    tbody {
+        tr {
+            border-bottom: 1px solid rgba($color-text, 0.1);
+            transition: background-color $transition-quick;
+
+            &:hover {
+                background-color: rgba($color-primary, 0.02);
+            }
+
+            // Coverage percentage indicators
+            &.high-coverage {
+                td.coverage {
+                    color: $color-high-coverage;
+                }
+            }
+
+            &.medium-coverage {
+                td.coverage {
+                    color: $color-medium-coverage;
+                }
+            }
+
+            &.low-coverage {
+                td.coverage {
+                    color: $color-low-coverage;
+                }
+            }
+        }
+
+        td {
+            padding: $spacing-medium;
+            color: $color-text;
+
+            // File name column
+            &.name {
+                font-family: $font-family-base;
+                white-space: nowrap;
+            }
+
+            // Number columns
+            &.number {
+                text-align: right;
+                font-variant-numeric: tabular-nums;
+            }
+
+            // Coverage percentage column
+            &.coverage {
+                font-weight: 600;
+                text-align: right;
+            }
+        }
+    }
+
+    // Footer styles
+    tfoot {
+        position: sticky;
+        bottom: 0;
+        background-color: $color-background;
+        box-shadow: $shadow-small;
+
+        td {
+            padding: $spacing-medium;
+            font-weight: 600;
+            border-top: 2px solid rgba($color-text, 0.1);
+        }
+    }
+
+    // Accessibility enhancements
+    caption {
+        padding: $spacing-medium;
+        text-align: left;
+        font-weight: 600;
+        color: $color-text;
+    }
+
+    // Screen reader only text
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+} 

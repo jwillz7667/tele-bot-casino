@@ -1,0 +1,67 @@
+// Screen reader only class
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// Focus visible utility
+.focus-visible {
+    outline: none;
+
+    &:focus-visible {
+        outline: 2px solid var(--color-primary, #0052cc);
+        outline-offset: 2px;
+    }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+// High contrast mode adjustments
+@media (forced-colors: active) {
+    .coverage-table {
+        th, td {
+            border: 1px solid CanvasText;
+        }
+    }
+
+    .coverage-table th[aria-sort] {
+        &::after {
+            forced-color-adjust: none;
+        }
+    }
+}
+
+// Print styles
+@media print {
+    .coverage-table {
+        page-break-inside: avoid;
+    }
+
+    .coverage-table-container {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .coverage-table-viewport {
+        transform: none !important;
+    }
+
+    .coverage-table tbody tr {
+        page-break-inside: avoid;
+    }
+} 
